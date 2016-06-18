@@ -147,6 +147,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://nochgames.ru/'
 # SOCIAL_AUTH_LOGIN_URL = '/app/oauth2login/'  # url for callback
 #SOCIAL_AUTH_USER_MODEL = 'polls.models.MyUser'  # custom user
 SOCIAL_AUTH_UID_LENGTH = 223
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['username','email']
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 SOCIAL_AUTH_SANITIZE_REDIRECTS = False
@@ -167,10 +168,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    'social.pipeline.social_auth.associate_by_email',  # <--- enable this one
+    #'social.pipeline.social_auth.associate_by_email',  # <--- enable this one
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
-    'polls.views.login_vk',
+    #'polls.views.login_vk',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
 )

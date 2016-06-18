@@ -44,11 +44,12 @@ urlpatterns = [
                        url(r'post_comment/$', views.post_comment, name='post_comment'),
                        url(r'upload_file/$', views.upload_file, name='upload_file'),
                        url(r'logout/$', views.logout_view, name='logout_view'),
-                       url(r'', include('social_auth.urls')),
+                       #url(r'', include('social_auth.urls')),
                        # url(r'^login/$', RedirectView.as_view(url='/login/vk-oauth/')),
                        # url(r'^private/$', profile),
-                       url(r'^app/', include('social.apps.django_app.urls', namespace='social')),
-                       url(r'^app/oauth2login$', views.oauth2login_view),  # views for auth
+                       #url(r'^app/', include('social.apps.django_app.urls', namespace='social')),
+                       #url(r'^app/oauth2login$', views.oauth2login_view),  # views for auth
+                       url('', include('social.apps.django_app.urls', namespace='social')),
                        url(r'^vk/', views.vk, name = 'vk'),
                        # eta xuinya xz che
                        # url('', include('social.apps.django_app.urls', namespace='social')),
