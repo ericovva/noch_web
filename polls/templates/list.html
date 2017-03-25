@@ -23,7 +23,7 @@
 
 
                         {% if post.play_link and post.play_link != "" %}
-                            <p><a href={{ post.play_link }} target="blank" class="btn btn-primary" style="background-color: #ff4200;width: 250px;"  role="button">PLAY</a></p>
+                            <p><a href={{ post.play_link }} target="blank" class="btn btn-primary" style="background-color: #ff4200;width: 180px;"  role="button">PLAY Beta</a></p>
                         {% endif %}
                         <p>
                         {% if post.android_link and post.android_link != "" %}
@@ -33,7 +33,7 @@
                             <a href={{ post.app_store_link }} target="blank" class="btn btn-primary" style="background-color: transparent;" role="button"><img src="/static/assets/images/AppStore.png"></a>
                         {% endif %}
                         </p>
-                            <p><a href="/post/{{ post.id }}/" target="blank" class="btn btn-default" style="background-color: #333333;width: 250px;"  role="button">READ MORE</a></p>
+                            <p><a href="/post/{{ post.id }}/" target="blank" class="btn btn-default" style="background-color: #333333;width: 180px;"  role="button">READ MORE</a></p>
 
 					</div>
 					<!-- <p style="text-align: right;"> {{ post.date }} </p> -->
