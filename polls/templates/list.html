@@ -9,7 +9,7 @@
 <h3 class="subtitle"> learn more </h3>
 <div class="row"> 
 {% for post in posts %}
-			
+    {% if post.is_active %}
 			<!--<div class="col-sm-4 {% if post.id == 2 or post.id == 4  %} col-sm-offset-2 {% endif %}"> -->
 			<div class="col-sm-4 ">
 				<div class="thumbnail">
@@ -20,16 +20,28 @@
 						<!-- <p><a>Build chemical compounds, get new atoms and absorb other players online!</a> </p> -->
 					  <!-- <a href="/post/{{ post.id }}/"> <p style="color: #ff2600"> Read more about the game...</p>  </a> -->
 						<p style="color: grey">Visits: {{ post.show_times }} </p>
-						<p><a href="http://nochgame.cloudapp.net/" target="blank" class="btn btn-primary" style="background-color: #ff4200;"  role="button">PLAY</a> 
-						   <a href="/post/{{ post.id }}/" target="blank" class="btn btn-default" style="background-color: #333333"  role="button">READ MORE</a>
-						</p>
+
+
+                        {% if post.play_link and post.play_link != "" %}
+                            <p><a href={{ post.play_link }} target="blank" class="btn btn-primary" style="background-color: #ff4200;width: 250px;"  role="button">PLAY</a></p>
+                        {% endif %}
+                        <p>
+                        {% if post.android_link and post.android_link != "" %}
+                            <a href={{ post.android_link }} target="blank" class="btn btn-primary"  style="background-color: transparent;" role="button"><img src="/static/assets/images/Android.png" height="50" width="50"></a>
+                        {% endif %}
+                        {% if post.app_store_link and post.app_store_link != "" %}
+                            <a href={{ post.app_store_link }} target="blank" class="btn btn-primary" style="background-color: transparent;" role="button"><img src="/static/assets/images/AppStore.png"></a>
+                        {% endif %}
+                        </p>
+                            <p><a href="/post/{{ post.id }}/" target="blank" class="btn btn-default" style="background-color: #333333;width: 250px;"  role="button">READ MORE</a></p>
+
 					</div>
 					<!-- <p style="text-align: right;"> {{ post.date }} </p> -->
 				</div>
 
 			</div>
 
-
+    {% endif %}
 {% endfor %}
 
 

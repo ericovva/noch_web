@@ -79,13 +79,17 @@ class Game(models.Model):
     description = models.TextField(default='Play and enjoy')
     img = models.ImageField(upload_to='games/',null=True)
     date = models.DateTimeField(auto_now=True,null=True)
-    download_link = models.CharField(max_length=300,null=True)
-    play_link = models.CharField(max_length=300,null=True)
+    download_link = models.CharField(max_length=300, null=True, blank=True)
+    play_link = models.CharField(max_length=300, null=True, blank=True)
+    android_link = models.CharField(max_length=300, null=True, blank=True)
+    app_store_link = models.CharField(max_length=300, null=True, blank=True)
+    microsoft_store_link = models.CharField(max_length=300, null=True, blank=True)
     show_times = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
     # функция необходима для того, чтобы при выводе объекта Post
     # как строки выводился вместо этого его title
     def __unicode__(self):
-        return self.title;
+        return self.title
 
 class Comment(models.Model):
     text = models.TextField(max_length=10000)
