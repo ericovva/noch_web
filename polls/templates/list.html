@@ -23,17 +23,15 @@
 
 
                         {% if post.play_link and post.play_link != "" %}
-                            <p><a href={{ post.play_link }} target="blank" class="btn btn-primary" style="background-color: #ff4200;width: 180px;"  role="button">PLAY Beta</a></p>
+                            <p><a href={{ post.play_link }} target="blank" class="btn btn-primary" id="game_button" style="background-color: #ff4200;"role="button">PLAY Beta</a></p>
                         {% endif %}
-                        <p>
                         {% if post.android_link and post.android_link != "" %}
-                            <a href={{ post.android_link }} target="blank" class="btn btn-primary"  style="background-color: transparent;" role="button"><img src="/static/assets/images/Android.png" height="50" width="50"></a>
+                             <p><a href={{ post.android_link }} target="blank" style="background-color: transparent;" role="button"><img src="/static/assets/images/GooglePlay.png"></a></p>
                         {% endif %}
                         {% if post.app_store_link and post.app_store_link != "" %}
-                            <a href={{ post.app_store_link }} target="blank" class="btn btn-primary" style="background-color: transparent;" role="button"><img src="/static/assets/images/AppStore.png"></a>
+                             <p><a href={{ post.app_store_link }} target="blank"  style="background-color: transparent;" role="button"><img src="/static/assets/images/AppStore.png"></a></p>
                         {% endif %}
-                        </p>
-                            <p><a href="/post/{{ post.id }}/" target="blank" class="btn btn-default" style="background-color: #333333;width: 180px;"  role="button">READ MORE</a></p>
+                            <p><a href="/post/{{ post.id }}/" target="blank" class="btn btn-default" id="game_button" style="background-color: #333333"  role="button">READ MORE</a></p>
 
 					</div>
 					<!-- <p style="text-align: right;"> {{ post.date }} </p> -->
