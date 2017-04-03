@@ -206,7 +206,8 @@ jQuery(function($){
   </a>
 </div>
 <br/>
- <div id="rating_3">
+    {% if user.is_authenticated %}
+    <div id="rating_3">
                 
                 {% csrf_token %}
                 <input type="hidden" name="val" value="{{rating}}"/>
@@ -215,6 +216,7 @@ jQuery(function($){
                 <input type="hidden" name="id" value="{{id}}"/>
                 
   </div>
+  {% endif %}
 
 
 <br/>
