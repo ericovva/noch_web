@@ -44,7 +44,7 @@ def logout_view(request):
 class LoginFormView(FormView):
     form_class = AuthenticationForm
     template_name = "login.html"
-    success_url = "/" 
+    success_url = "/"
     def form_valid(self, form):
         self.user = form.get_user()
         login(self.request, self.user)
@@ -54,11 +54,12 @@ class RegisterFormView(FormView):
     form_class = CustomUserCreationForm
     success_url = "/auth/"
     template_name = "register.html"
+
     def form_valid(self, form):
         form.save()
-        mes = "Look here http://127.0.0.1/posts/ for new games!"
-        send_mail('Regisration complete', mes, 'from@example.com',
-    ['ericovva@yandex.ru'], fail_silently=False)
+        # mes = "Look here http://127.0.0.1/posts/ for new games!"
+        # send_mail('Regisration complete', mes, 'from@example.com',
+        #             ['ericovva@yandex.ru'], fail_silently=True)
         return super(RegisterFormView, self).form_valid(form)
 
 from social.apps.django_app.utils import psa
@@ -71,7 +72,7 @@ def login_vk(request, backend):
         return 'OK'
     else:
         return 'ERROR'
-  
+
 
     return HttpResponseRedirect("/app/oauth2login")
 def oauth2login_view(request, **kwargs):
@@ -82,7 +83,7 @@ def oauth2login_view(request, **kwargs):
     #     login(request, user)
     return HttpResponseRedirect("/profile")
 
-from django.views.decorators.csrf import csrf_exempt 
+from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def upload_file(request):
@@ -100,13 +101,13 @@ def upload_file(request):
                     'msg' : path,
                     'status' : 'OK'
                 }
-            
+
             image = Image.open(path)
 
             pw = image.width
             ph = image.height
             print(pw)
-            nw = 150    
+            nw = 150
             nh = 150
             pr = float(pw) / float(ph)
             nr = float(nw) / float(nh)
@@ -145,7 +146,7 @@ def upload_file(request):
     return render(request,'profile.html', {'form': form})
 
 def handle_uploaded_file(f,path):
-    
+
     with open(path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
@@ -184,14 +185,14 @@ def profile (request):
     profile_photo = ProfilePhoto.objects.filter(user=request.user.id)
     if profile_photo:
         photo = "/" + profile_photo[0].img_src
-    else: 
+    else:
         photo = "http://robohash.org/sitsequiquia.png?size=120x120"
 
     return render(request,'profile.html', {'form': form, 'photo': photo})#render_to_response('profile.html')
 
 
 def we (request):
-    
+
     # Получаем список постов
     teams = Team.objects.all()
     # отрисовываем
@@ -206,7 +207,7 @@ def compute_rating(type_,id_):
         for rate in rating:
             sum = sum + rate.mark
         sum = sum / len(rating)
-    return sum 
+    return sum
 
 @csrf_protect
 def change_view_unlike(request):
@@ -252,7 +253,7 @@ def change_view(request):
         print("ok")
         new_rating = Rating(mark = float(new_voice), content_object = content_object_)
         new_rating.save()
-        
+
         u.rating_set.add(new_rating)
         num = compute_rating(type_=content_object_type.id,id_=int(request.POST["id"]))
         response = {
@@ -277,7 +278,7 @@ def post_comment(request):
                 print(to_user_id.email)
                 answer_to = Comment.objects.get(id=int(request.POST["answer_to_comment_id"]));
                 print(answer_to)
-                mes = "http://playnoch.cloudapp.net/post/" + str(request.POST["id"]) + "/" 
+                mes = "http://playnoch.cloudapp.net/post/" + str(request.POST["id"]) + "/"
                 print("==========")
                 #send_mail("На ваш комментарий <<" + answer_to.text + ">>", mes, 'from@example.com',[to_user_id.email], fail_silently=False)
                 ###########
@@ -286,10 +287,10 @@ def post_comment(request):
                 html_content = "<div style=\'font-size:30px; color: red;\'>NOCH</div><pre>На твой комментарий, <a href=\'" + mes + "\'>ответил</a>  " + request.user.username + "</pre>"
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 msg.attach_alternative(html_content, "text/html")
-                msg.send()  
+                msg.send()
                 #########
 
-            game_id_ = request.POST["id"] 
+            game_id_ = request.POST["id"]
 
         # g = Game.objects.get(id=int(game_id_))
         # u = MyUser.objects.get(id=request.user.id)
@@ -314,7 +315,7 @@ def post_comment(request):
 
             # print(data)
             # response = data
-            
+
             profile_photo = ProfilePhoto.objects.filter(user=request.user.id)
             print(profile_photo)
             photo_src = "media/profile.png"
@@ -368,14 +369,14 @@ def get_post (request, post_id):
             for rate in rating:
                 sum = sum + rate.mark
             sum = sum / len(rating)
-            
+
         count = len(images)
         images_list = list(images)
         first_img_link = ""
         if len(images_list) > 0:
             first_img_link = images_list[0].img
             images_list.pop(0)
-        else: 
+        else:
             first_img_link = "screenshots/default.jpg"
         lists = []
         for i in range(0,count):
@@ -411,7 +412,7 @@ def posts_page (request):
         #         sum = sum + rating[j].mark
         #         j = j + 1
         #     ratings.append(sum / len(rating))
-        # else: 
+        # else:
         #     ratings.append(sum)
         # print("ratings[i]")
         # print(ratings[i])
